@@ -3,10 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>Nikah · NIZAR JUMANA</title>
+  <title>Nikah · NIZAR &amp; JUMANA</title>
 
-  <!-- N&J Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fdfaf5'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='26' font-weight='500' fill='%23b9985c' text-anchor='middle'%3EN%26J%3C/text%3E%3C/svg%3E">
+  <!-- ========== FAVICON + SOCIAL SHARE PREVIEW (WhatsApp, Instagram, Facebook, Twitter) ========== -->
+  <link rel="icon" type="image/jpeg" href="https://files.catbox.moe/vilktg.jpg">
+  <link rel="apple-touch-icon" href="https://files.catbox.moe/vilktg.jpg">
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nikah · Hafiz Muhammed Nizar & Fathima Jumana">
+  <meta property="og:description" content="With the blessings of our families — join us for the Nikah Ceremony on 01 October 2026 at Masjid Noor, Cheerattamala.">
+  <meta property="og:image" content="https://files.catbox.moe/vilktg.jpg">
+  <meta property="og:image:secure_url" content="https://files.catbox.moe/vilktg.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nikah Invitation — Hafiz Muhammed Nizar & Fathima Jumana">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nikah · Hafiz Muhammed Nizar & Fathima Jumana">
+  <meta name="twitter:description" content="With the blessings of our families — join us for the Nikah Ceremony on 01 October 2026 at Masjid Noor, Cheerattamala.">
+  <meta name="twitter:image" content="https://files.catbox.moe/vilktg.jpg">
+
+  <!-- Theme Color (Mobile browser bar) -->
+  <meta name="theme-color" content="#fdfaf5">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1788,13 +1808,11 @@
           var guests = (document.getElementById('rsvpGuests') || {}).value || '1';
           name = name.trim() || 'Guest';
 
-          // Show the success popup
           if (rsvpPopup) {
             rsvpPopup.classList.add('open');
             document.body.style.overflow = 'hidden';
           }
 
-          // Open WhatsApp in background after a short delay
           var message = 'Nikah RSVP:%0AName: ' + encodeURIComponent(name) + '%0AAttendance: ' + attendance + '%0AGuests: ' + guests;
           var phone = '';
           var url = phone ? 'https://wa.me/' + phone + '?text=' + message : 'https://wa.me/?text=' + message;
