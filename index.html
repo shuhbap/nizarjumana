@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>Nikah · NIZAR &amp; JUMANA</title>
+  <title>Nikah · NIZAR JUMANA</title>
 
   <!-- N&J Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23fdfaf5'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='26' font-weight='500' fill='%23b9985c' text-anchor='middle'%3EN%26J%3C/text%3E%3C/svg%3E">
@@ -864,6 +864,110 @@
     }
     .form-group select option { background: var(--bg-ivory); color: var(--text-dark); }
 
+    /* ========== RSVP SUCCESS POPUP ========== */
+    .rsvp-popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 16, 12, 0.55);
+      backdrop-filter: blur(8px);
+      z-index: 10001;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .rsvp-popup-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+
+    .rsvp-popup {
+      max-width: 400px;
+      width: 100%;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 30px 80px -20px rgba(0,0,0,0.35);
+      transform: scale(0.92);
+      animation: popupIn 0.45s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    }
+    @keyframes popupIn {
+      from { transform: scale(0.92); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .rsvp-popup-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: rgba(185, 152, 92, 0.12);
+      border: 1.5px solid var(--gold-champagne);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.4rem;
+      color: var(--gold-antique);
+      font-size: 1.6rem;
+      animation: iconPop 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0.15s both;
+    }
+    @keyframes iconPop {
+      0%   { transform: scale(0); opacity: 0; }
+      60%  { transform: scale(1.15); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .rsvp-popup-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .rsvp-popup-arabic {
+      font-family: 'Amiri', serif;
+      font-size: 1.15rem;
+      color: var(--gold-antique);
+      margin-bottom: 0.7rem;
+      direction: rtl;
+      line-height: 1.8;
+    }
+
+    .rsvp-popup-message {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      line-height: 1.65;
+      margin-bottom: 1.6rem;
+    }
+
+    .rsvp-popup-close {
+      display: inline-block;
+      padding: 0.7rem 2.2rem;
+      border: 1px solid var(--gold-antique);
+      color: var(--gold-antique);
+      background: transparent;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition);
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .rsvp-popup-close:hover {
+      background: var(--gold-antique);
+      color: var(--bg-ivory);
+      box-shadow: 0 8px 20px -6px rgba(185, 152, 92, 0.4);
+    }
+
     /* ========== SIMPLE FOOTER — COMPLIMENTS FAMILY & FRIENDS ========== */
     .footer-simple {
       position: relative;
@@ -1094,6 +1198,8 @@
 
       .footer-simple { padding: 2rem 1rem 1.5rem; margin-top: 2.5rem; }
       .footer-compliments-names { font-size: 1.3rem; }
+
+      .rsvp-popup { padding: 2rem 1.5rem; }
     }
 
     @media (max-width: 480px) {
@@ -1139,6 +1245,17 @@
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightboxClose" aria-label="Close"><i class="fas fa-times"></i></button>
     <img src="https://xenocdn.xenocdn.workers.dev/bcbf2003.jpeg" alt="Nikah Invitation Poster" id="lightboxImg">
+  </div>
+
+  <!-- RSVP SUCCESS POPUP -->
+  <div class="rsvp-popup-overlay" id="rsvpPopup">
+    <div class="rsvp-popup">
+      <div class="rsvp-popup-icon"><i class="fas fa-check"></i></div>
+      <div class="rsvp-popup-title" data-en="Sent" data-ar="تم الإرسال" data-ml="അയച്ചു">Sent</div>
+      <div class="rsvp-popup-arabic">بارك الله فيكم</div>
+      <div class="rsvp-popup-message" data-en="Your RSVP has been received with gratitude." data-ar="تم استلام ردكم بامتنان." data-ml="നിങ്ങളുടെ സാന്നിധ്യം നന്ദിയോടെ സ്വീകരിച്ചു.">Your RSVP has been received with gratitude.</div>
+      <button type="button" class="rsvp-popup-close" id="rsvpPopupClose" data-en="Close" data-ar="إغلاق" data-ml="അടയ്ക്കുക">Close</button>
+    </div>
   </div>
 
   <div class="content">
@@ -1659,20 +1776,54 @@
         }, { passive: true });
       }
 
-      // ===== RSVP =====
+      // ===== RSVP WITH SUCCESS POPUP =====
       var rsvpBtn = document.getElementById('rsvpBtn');
+      var rsvpPopup = document.getElementById('rsvpPopup');
+      var rsvpPopupClose = document.getElementById('rsvpPopupClose');
+
       if (rsvpBtn) {
         rsvpBtn.addEventListener('click', function() {
           var name = (document.getElementById('rsvpName') || {}).value || 'Guest';
           var attendance = (document.getElementById('rsvpAttendance') || {}).value || 'yes';
           var guests = (document.getElementById('rsvpGuests') || {}).value || '1';
           name = name.trim() || 'Guest';
+
+          // Show the success popup
+          if (rsvpPopup) {
+            rsvpPopup.classList.add('open');
+            document.body.style.overflow = 'hidden';
+          }
+
+          // Open WhatsApp in background after a short delay
           var message = 'Nikah RSVP:%0AName: ' + encodeURIComponent(name) + '%0AAttendance: ' + attendance + '%0AGuests: ' + guests;
           var phone = '';
           var url = phone ? 'https://wa.me/' + phone + '?text=' + message : 'https://wa.me/?text=' + message;
-          window.open(url, '_blank');
+          setTimeout(function() { window.open(url, '_blank'); }, 700);
         });
       }
+
+      if (rsvpPopupClose && rsvpPopup) {
+        rsvpPopupClose.addEventListener('click', function() {
+          rsvpPopup.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      }
+
+      if (rsvpPopup) {
+        rsvpPopup.addEventListener('click', function(e) {
+          if (e.target === rsvpPopup) {
+            rsvpPopup.classList.remove('open');
+            document.body.style.overflow = '';
+          }
+        });
+      }
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && rsvpPopup && rsvpPopup.classList.contains('open')) {
+          rsvpPopup.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      });
 
     })();
   </script>
